@@ -29,8 +29,21 @@ module.exports = function(config) {
   }
 }
 		},
-		reporters: ["progress", "coverage"],
+		reporters: ["progress", "junit", "coverage"],
 
+junitReporter: {
+  outputDir: "reports",
+  outputFile: "TESTS-karma.xml",
+  useBrowserName: false
+},
+
+coverageReporter: {
+  dir: "coverage",
+  reporters: [
+    { type: "lcov", subdir: "." },
+    { type: "text-summary" }
+  ]
+},
         // 🔥 CHANGE HERE
         browsers: ["ChromiumHeadlessNoSandbox"],
 
