@@ -31,8 +31,22 @@ module.exports = function(config) {
 		},
 		reporters: ["progress", "coverage"],
 
-        browsers: ["ChromiumHeadless"],
-        
+        // 🔥 CHANGE HERE
+        browsers: ["ChromiumHeadlessNoSandbox"],
+
+        // 🔥 ADD THIS BLOCK
+        customLaunchers: {
+            ChromiumHeadlessNoSandbox: {
+                base: "ChromiumHeadless",
+                flags: [
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox",
+                    "--disable-dev-shm-usage",
+                    "--disable-gpu"
+                ]
+            }
+        },
+
         browserConsoleLogOptions: {
 			level: "error"
         },
