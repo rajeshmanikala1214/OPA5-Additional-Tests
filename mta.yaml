@@ -28,15 +28,6 @@ modules:
           name: html5module
           target-path: .
 
-  - name: fioriapp-approuter
-    type: approuter.nodejs
-    path: fioriapp-approuter
-    requires:
-      - name: fioriapp_html_repo_runtime
-    parameters:
-      disk-quota: 256M
-      memory: 256M
-
 resources:
   - name: fioriapp_html_repo_runtime
     type: org.cloudfoundry.managed-service
