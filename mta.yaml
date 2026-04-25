@@ -2,6 +2,28 @@ _schema-version: "3.2"
 ID: fioriapp
 version: 0.0.1
 modules:
+- name: fioriapp-approuter
+  type: approuter.nodejs
+  path: fioriapp-approuter
+  requires:
+  - name: fioriapp_html_repo_runtime
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: fioriapp_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: fioriapp_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - HTML5Module-content.zip
+      name: HTML5Module
+      target-path: resources/
 - name: HTML5Module
   type: html5
   path: HTML5Module
