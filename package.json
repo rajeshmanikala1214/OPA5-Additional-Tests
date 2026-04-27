@@ -11,6 +11,7 @@
     "karma-coverage": "^2.0.2",
     "karma-junit-reporter": "^2.0.1",
     "karma-ui5": "^2.2.0",
+    "karma-webdriver-launcher": "^1.0.8",
     "rimraf": "3.0.2"
   },
   "scripts": {
