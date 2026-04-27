@@ -10,25 +10,26 @@ module.exports = function(config) {
     .find(i => i.family === 'IPv4' && !i.internal)?.address || 'localhost';
 
   config.set({
-    frameworks: ['ui5', 'browserify', 'mocha'], // Added 'ui5' framework
+    frameworks: ['ui5', 'qunit', 'browserify', 'mocha'], // Added 'ui5' framework
 
     ui5: {
-        url: "https://sapui5.hana.ondemand.com",
-        mode: "script", // Best for OPA5/Unit tests in CI
-        config: {
-            async: true,
-            resourceRoots: {
-                "ns.HTML5Module": "./webapp" // Matches your namespace in Startup.js
-            }
-        },
-        tests: [
-            "ns/HTML5Module/test/unit/AllTests",
-            "ns/HTML5Module/test/integration/AllJourneys"
-        ]
+      url: "https://sapui5.hana.ondemand.com",
+      mode: "script",
+      config: {
+        async: true,
+        resourceRoots: {
+          "ns.HTML5Module": "./webapp" 
+        }
+      },
+      // Point to the specific "All" files you shared
+      tests: [
+        "ns/HTML5Module/test/unit/AllTests",
+        "ns/HTML5Module/test/integration/AllJourneys"
+      ]
     },
 
     files: [
-        { pattern: 'webapp/**', served: true, included: false, watched: true }
+      { pattern: 'webapp/**', served: true, included: false, watched: true }
     ],
 
     preprocessors: {
@@ -87,6 +88,8 @@ module.exports = function(config) {
     browserNoActivityTimeout: 210000,
 
     plugins: [
+      'karma-ui5',
+      'karma-qunit',
       'karma-mocha',
       'karma-chrome-launcher',
       'karma-junit-reporter',
