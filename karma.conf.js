@@ -45,6 +45,7 @@ module.exports = function(config) {
     singleRun: true,
 
      plugins: [
+      'karma-ui5', 
       'karma-mocha',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
