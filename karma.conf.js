@@ -1,13 +1,23 @@
+const os = require('os');
+
 module.exports = function(config) {
   "use strict";
 
+  // Get internal IP so Selenium sidecar can reach this container
+  const networkInterfaces = os.networkInterfaces();
+  const containerIp = Object.values(networkInterfaces)
+    .flat()
+    .find(i => i.family === 'IPv4' && !i.internal)?.address || 'localhost';
+
   config.set({
     frameworks: ['browserify', 'mocha'],
+    
     ui5: {
       url: "https://sapui5.hana.ondemand.com"
     },
 
-     files: [
+    // Ensure these paths actually exist in your repository!
+    files: [
       'test/**/*.js' 
     ],
 
@@ -35,18 +45,18 @@ module.exports = function(config) {
       suite: 'KarmaTests'
     },
 
-    // Generates SonarQube Generic Test Execution XML directly
     sonarQubeUnitReporter: {
       sonarQubeVersion: 'LATEST',
       outputFile: 'reports/test-execution.xml',
       overrideTestDescription: true,
       testPaths: ['test'],
-      testFilePattern: '.js', 
+      testFilePattern: '.js', // Matches your files pattern
       useBrowserName: false
     },
 
     port: 9876,
-    hostname: process.env.PIPER_SELENIUM_HOSTNAME || '0.0.0.0',
+    hostname: containerIp, // Use detected IP
+    listenAddress: '0.0.0.0',
      
     colors: true,
     logLevel: config.LOG_INFO,
@@ -64,7 +74,7 @@ module.exports = function(config) {
         },
         browserName: 'chrome',
         name: 'Karma',
-        flags: ['--no-sandbox', '--disable-dev-shm-usage'],
+        flags: ['--no-sandbox', '--disable-dev-shm-usage', '--headless'],
         pseudoActivityInterval: 30000
       }
     },
@@ -75,7 +85,7 @@ module.exports = function(config) {
     browserNoActivityTimeout: 210000,
     reportSlowerThan: 500,
 
-     plugins: [
+    plugins: [
       'karma-ui5', 
       'karma-mocha',
       'karma-chrome-launcher',
