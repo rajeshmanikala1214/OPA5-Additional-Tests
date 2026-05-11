@@ -23,8 +23,8 @@ module.exports = function(config) {
       },
       // Point to the specific "All" files you shared
       tests: [
-        "ns/HTML5Module/test/unit/AllTests",
-        "ns/HTML5Module/test/integration/AllJourneys"
+        "ns/webapp/test/unit/AllTests",
+        "ns/webapp/test/integration/AllJourneys"
       ]
     },
 
