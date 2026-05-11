@@ -14,7 +14,7 @@ module.exports = function (config) {
 
     basePath: "",
 
-    frameworks: ["ui5", "qunit", "browserify", "mocha"],
+    frameworks: ["ui5", "qunit"],
 
     ui5: {
       url: "https://sapui5.hana.ondemand.com",
@@ -24,8 +24,8 @@ module.exports = function (config) {
         async: true,
 
         resourceRoots: {
-          "ns.HTML5Module": "./webapp"
-        }
+  "ns.HTML5Module": "webapp" 
+}
       },
 
       tests: [
@@ -34,14 +34,14 @@ module.exports = function (config) {
       ]
     },
 
-    files: [
-      {
-        pattern: "webapp/**",
-        served: true,
-        included: false,
-        watched: true
-      }
-    ],
+    // files: [
+    //   {
+    //     pattern: "webapp/**",
+    //     served: true,
+    //     included: false,
+    //     watched: true
+    //   }
+    // ],
 
     exclude: [
       "karma.conf.js"
@@ -166,10 +166,10 @@ module.exports = function (config) {
     plugins: [
       "karma-ui5",
       "karma-qunit",
-      "karma-mocha",
+     // "karma-mocha",
       "karma-chrome-launcher",
       "karma-junit-reporter",
-      "karma-browserify",
+      //"karma-browserify",
       "karma-coverage",
       "karma-webdriver-launcher",
       "karma-sonarqube-unit-reporter"
