@@ -5,7 +5,7 @@ sap.ui.getCore().attachInit(function () {
 	"use strict";
 
 	sap.ui.require([
-		"ns/HTML5Module/test/unit/AllTests"
+		"/test/unit/AllTests"
 	], function () {
 		QUnit.start();
 	});
