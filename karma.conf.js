@@ -14,9 +14,9 @@ module.exports = function(config) {
         }
       },
       tests: [
-        "ns/HTML5Module/test/unit/AllTests",
-        "ns/HTML5Module/test/integration/AllJourneys"
-      ]
+    "ns.HTML5Module.test.unit.AllTests",
+    "ns.HTML5Module.test.integration.AllJourneys"
+  ]
     },
 
     preprocessors: {
