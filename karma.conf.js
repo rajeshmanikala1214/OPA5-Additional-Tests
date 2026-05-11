@@ -32,10 +32,10 @@ module.exports = function(config) {
       { pattern: 'webapp/**', served: true, included: false, watched: true }
     ],
 
-    preprocessors: {
-        // Use coverage on the actual source code, not the tests
-        'webapp/**/*.js': ['coverage']
-    },
+   preprocessors: {
+  'webapp/{controller,model}/*.js': ['coverage']
+},
+
 
     // 3. Simplified Reporters (Removed sonarqubeUnit temporarily to stop the crash)
     reporters: ['progress', 'coverage', 'junit'],
@@ -66,21 +66,20 @@ module.exports = function(config) {
     autoWatch: false,
     singleRun: true,
 
-    browsers: ['SeleniumChrome'],
+   browsers: ['ChromeHeadlessNoSandbox'],
 
-    customLaunchers: {
-      SeleniumChrome: {
-        base: 'WebDriver',
-        config: {
-          hostname: process.env.PIPER_SELENIUM_WEBDRIVER_HOSTNAME || 'selenium',
-          port: parseInt(process.env.PIPER_SELENIUM_WEBDRIVER_PORT) || 4444
-        },
-        browserName: 'chrome',
-        name: 'Karma',
-        flags: ['--no-sandbox', '--disable-dev-shm-usage', '--headless'],
-        pseudoActivityInterval: 30000
-      }
-    },
+customLaunchers: {
+  ChromeHeadlessNoSandbox: {
+    base: 'ChromeHeadless',
+    flags: [
+      '--no-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--headless',
+      '--remote-debugging-port=9222'
+    ]
+  }
+},
 
     captureTimeout: 210000,
     browserDisconnectTimeout: 210000,
